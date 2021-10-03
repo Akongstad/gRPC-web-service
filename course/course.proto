@@ -1,6 +1,6 @@
 syntax = "proto3";
-option go_package = "/Users/andreaskongstad/Documents/VSCode/gRPC-web-service/course.proto";
-package coruse_proto;
+option go_package = "/Users/andreaskongstad/Documents/VSCode/gRPC-web-service/course/course.proto";
+package course;
 
 message Course{
     string ID = 1;

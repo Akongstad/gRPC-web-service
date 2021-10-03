@@ -1,4 +1,4 @@
-package course_proto
+package course
 
 import (
 	context "context"
