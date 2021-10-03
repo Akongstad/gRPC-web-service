@@ -1,0 +1,15 @@
+syntax = "proto3";
+option go_package = "/Users/andreaskongstad/Documents/VSCode/gRPC-web-service/course.proto";
+package coruse_proto;
+
+message Course{
+    string ID = 1;
+    string Title = 2;
+    string Teacher = 3;
+    int32 Students = 4;
+    float Ects = 5;
+    float Raing = 6;
+}
+service CourseService{
+    rpc SayHello(Course) returns (Course){}
+}
