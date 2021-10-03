@@ -1,6 +1,6 @@
 syntax = "proto3";
-option go_package = "/Users/andreaskongstad/Documents/VSCode/gRPC-web-service/course/course.proto";
-package course;
+option go_package = "/Users/andreaskongstad/Documents/VSCode/gRPC-web-service/course_proto/course.proto";
+package course_proto;
 
 message Course{
     string ID = 1;
@@ -11,5 +11,5 @@ message Course{
     float Raing = 6;
 }
 service CourseService{
-    rpc SayHello(Course) returns (Course){}
+    rpc getCourse(Course) returns (Course){}
 }

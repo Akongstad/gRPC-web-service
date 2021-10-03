@@ -5,9 +5,22 @@ import (
 	"log"
 	"net"
 
+	//pb "github.com/Akongstad/gRPC-web-service"
 	"google.golang.org/grpc"
 )
 
+const (
+	port = ":50051"
+)
+
+/* type server struct {
+	pb.UnimplementedGreeterServer
+} */
+
+/* func (s *Server) getCourse(ctx context.Context, course *Course) (*Course, error) {
+	log.Printf("Received message from client: %s", course.Title)
+	return &Course{Title: "Hello from server"}, nil
+} */
 func main() {
 	fmt.Println("Hello World!")
 	lis, err := net.Listen("tcp", ":9000")
