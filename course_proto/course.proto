@@ -1,5 +1,5 @@
 syntax = "proto3";
-option go_package = "/Users/andreaskongstad/Documents/VSCode/gRPC-web-service/course_proto/course.proto";
+option go_package = "/Users/andreaskongstad/Documents/goLang/gRPC-web-service/course_proto/";
 package course_proto;
 
 message Course{
@@ -10,6 +10,10 @@ message Course{
     float Ects = 5;
     float Raing = 6;
 }
+message Id{
+    string ID = 1;
+}
+
 service CourseService{
-    rpc getCourse(Course) returns (Course){}
+    rpc getCourse(Id) returns (Course){}
 }

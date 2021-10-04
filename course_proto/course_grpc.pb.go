@@ -18,7 +18,7 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type CourseServiceClient interface {
-	GetCourse(ctx context.Context, in *Course, opts ...grpc.CallOption) (*Course, error)
+	GetCourse(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Course, error)
 }
 
 type courseServiceClient struct {
@@ -29,7 +29,7 @@ func NewCourseServiceClient(cc grpc.ClientConnInterface) CourseServiceClient {
 	return &courseServiceClient{cc}
 }
 
-func (c *courseServiceClient) GetCourse(ctx context.Context, in *Course, opts ...grpc.CallOption) (*Course, error) {
+func (c *courseServiceClient) GetCourse(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Course, error) {
 	out := new(Course)
 	err := c.cc.Invoke(ctx, "/course_proto.CourseService/getCourse", in, out, opts...)
 	if err != nil {
@@ -42,7 +42,7 @@ func (c *courseServiceClient) GetCourse(ctx context.Context, in *Course, opts ..
 // All implementations must embed UnimplementedCourseServiceServer
 // for forward compatibility
 type CourseServiceServer interface {
-	GetCourse(context.Context, *Course) (*Course, error)
+	GetCourse(context.Context, *Id) (*Course, error)
 	mustEmbedUnimplementedCourseServiceServer()
 }
 
@@ -50,7 +50,7 @@ type CourseServiceServer interface {
 type UnimplementedCourseServiceServer struct {
 }
 
-func (UnimplementedCourseServiceServer) GetCourse(context.Context, *Course) (*Course, error) {
+func (UnimplementedCourseServiceServer) GetCourse(context.Context, *Id) (*Course, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetCourse not implemented")
 }
 func (UnimplementedCourseServiceServer) mustEmbedUnimplementedCourseServiceServer() {}
@@ -67,7 +67,7 @@ func RegisterCourseServiceServer(s grpc.ServiceRegistrar, srv CourseServiceServe
 }
 
 func _CourseService_GetCourse_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Course)
+	in := new(Id)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -79,7 +79,7 @@ func _CourseService_GetCourse_Handler(srv interface{}, ctx context.Context, dec 
 		FullMethod: "/course_proto.CourseService/getCourse",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CourseServiceServer).GetCourse(ctx, req.(*Course))
+		return srv.(CourseServiceServer).GetCourse(ctx, req.(*Id))
 	}
 	return interceptor(ctx, in, info, handler)
 }
