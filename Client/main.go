@@ -5,8 +5,7 @@ import (
 	"log"
 	"time"
 
-	pb "course_proto" // <- Insert into GOPATH
-
+	"github.com/Akongstad/gRPC-web-service/course_proto"
 	"google.golang.org/grpc"
 )
 
@@ -21,10 +20,10 @@ func main() {
 		log.Fatalf("did not connect: %v", err)
 	}
 	defer conn.Close()
-	c := pb.NewCourseServiceClient(conn)
+	c := course_proto.NewCourseServiceClient(conn)
 
 	// Contact the server and print out its response.
-	id := pb.Id{
+	id := course_proto.Id{
 		ID: "1",
 	}
 

@@ -5,7 +5,7 @@ import (
 	"log"
 	"net"
 
-	pb "course_proto" // <- Insert into GOPATH
+	"github.com/Akongstad/gRPC-web-service/course_proto"
 
 	"google.golang.org/grpc"
 )
@@ -15,16 +15,16 @@ const (
 )
 
 type server struct {
-	pb.UnimplementedCourseServiceServer
+	course_proto.UnimplementedCourseServiceServer
 }
 
-var courses = []pb.Course{
+var courses = []course_proto.Course{
 	{ID: "1", Title: "Algo", Teacher: "Thore", Students: 100, Ects: 7.5, Raing: 9.1},
 	{ID: "2", Title: "Code", Teacher: "Teach", Students: 200, Ects: 7.5, Raing: 8.9},
 	{ID: "3", Title: "Design", Teacher: "Anders", Students: 50, Ects: 15, Raing: 8},
 }
 
-func (s *server) GetCourse(ctx context.Context, id *pb.Id) (*pb.Course, error) {
+func (s *server) GetCourse(ctx context.Context, id *course_proto.Id) (*course_proto.Course, error) {
 	log.Printf("Server received get command, ID: %s", id.GetID())
 	for _, a := range courses {
 		if a.GetID() == id.GetID() {
@@ -35,7 +35,7 @@ func (s *server) GetCourse(ctx context.Context, id *pb.Id) (*pb.Course, error) {
 	log.Printf("Course not found")
 	return nil, nil
 }
-func (s *server) DeleteCourse(ctx context.Context, id *pb.Id) (*pb.Course, error) {
+func (s *server) DeleteCourse(ctx context.Context, id *course_proto.Id) (*course_proto.Course, error) {
 	log.Printf("Server received delete command, ID: %s", id.GetID())
 	var index = 0
 	for _, a := range courses {
@@ -57,7 +57,7 @@ func main() {
 	s := server{}
 	grpcServer := grpc.NewServer()
 
-	pb.RegisterCourseServiceServer(grpcServer, &s)
+	course_proto.RegisterCourseServiceServer(grpcServer, &s)
 
 	log.Printf("server listening at %v", lis.Addr())
 	//fmt.Printf("server listening at %v", lis.Addr())
