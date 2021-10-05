@@ -5,7 +5,7 @@ import (
 	"log"
 	"net"
 
-	pb "course_proto"
+	pb "course_proto" // <- Insert into GOPATH
 
 	"google.golang.org/grpc"
 )
