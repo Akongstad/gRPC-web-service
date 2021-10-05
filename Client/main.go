@@ -49,4 +49,23 @@ func main() {
 		log.Fatalf("could not find Course: %v", err)
 	}
 	log.Printf("Server says: %s", r2)
+
+	clientMessage = "Client says: Delete course with Id = " + id.ID
+	log.Printf(clientMessage)
+	id.ID = "1"
+	time.Sleep(time.Second * 1)
+	r3, err := c.DeleteCourse(context.Background(), &id)
+	if err != nil {
+		log.Fatalf("could not find Course: %v", err)
+	}
+	log.Printf("Server says: %s", r3)
+
+	time.Sleep(time.Second * 1)
+	clientMessage = "Client says: Give course with Id = " + id.ID
+	log.Printf(clientMessage)
+	r4, err := c.GetCourse(context.Background(), &id)
+	if err != nil {
+		log.Fatalf("could not find Course: %v", err)
+	}
+	log.Printf("Server says: %s", r4)
 }

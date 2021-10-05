@@ -1,5 +1,5 @@
 syntax = "proto3";
-option go_package = "/Users/andreaskongstad/Documents/goLang/gRPC-web-service/course_proto/";
+option go_package = "/Users/andreaskongstad/Documents/goLang/gRPC-web-service/course_proto";
 package course_proto;
 
 message Course{
@@ -15,5 +15,7 @@ message Id{
 }
 
 service CourseService{
-    rpc getCourse(Id) returns (Course){}
+    rpc GetCourse(Id) returns (Course){}
+    rpc AddCourse(Course) returns(Course){}
+    rpc DeleteCourse(Id) returns(Course){}
 }
